@@ -51,69 +51,95 @@ function App() {
   return (
   <div style={{
     minHeight: "100vh",
-    background: "#0f172a",
-    color: "white",
+    background: "linear-gradient(135deg, #0f172a, #1e293b)",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    fontFamily: "Arial"
   }}>
     <div style={{
-      background: "#1e293b",
+      background: "rgba(30, 41, 59, 0.9)",
       padding: 30,
-      borderRadius: 12,
-      width: 400,
-      textAlign: "center"
+      borderRadius: 16,
+      width: 380,
+      textAlign: "center",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+      backdropFilter: "blur(10px)",
+      color: "white"
     }}>
-      <h2>💰 Team Budget Tracker</h2>
+      
+      <h2 style={{ marginBottom: 20 }}>💰 Budget Tracker</h2>
 
       <input
         placeholder="Amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        style={{ padding: 8, margin: 5, width: "90%" }}
+        style={{
+          padding: 10,
+          marginBottom: 10,
+          width: "100%",
+          borderRadius: 8,
+          border: "none"
+        }}
       />
 
       <input
-        placeholder="Category"
+        placeholder="Category (Food, Travel...)"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        style={{ padding: 8, margin: 5, width: "90%" }}
+        style={{
+          padding: 10,
+          marginBottom: 10,
+          width: "100%",
+          borderRadius: 8,
+          border: "none"
+        }}
       />
 
       <button
         onClick={addExpense}
         style={{
-          padding: 10,
-          marginTop: 10,
-          width: "95%",
+          padding: 12,
+          width: "100%",
           background: "#38bdf8",
           border: "none",
-          borderRadius: 6
+          borderRadius: 8,
+          fontWeight: "bold",
+          cursor: "pointer",
+          transition: "0.3s"
         }}
       >
         Add Expense
       </button>
 
-      <h3 style={{ marginTop: 20 }}>Category Breakdown</h3>
+      <h3 style={{ marginTop: 20 }}>📊 Breakdown</h3>
 
       {Object.keys(summary).length > 0 ? (
-  <div style={{ width: 400 }}>
-    <Pie
-      data={{
-        labels: Object.keys(summary),
-        datasets: [{ data: Object.values(summary) }]
-      }}
-    />
+        <>
+          <div style={{ marginTop: 10 }}>
+            <Pie
+              data={{
+                labels: Object.keys(summary),
+                datasets: [
+                  {
+                    data: Object.values(summary)
+                  }
+                ]
+              }}
+            />
+          </div>
 
-    {/* 👇 THIS GOES HERE (UNDER CHART) */}
-    <p style={{ marginTop: 15, color: "#38bdf8" }}>
-      {insight}
-    </p>
-
-  </div>
-) : (
-  <p>No data yet</p>
-)}
+          <p style={{
+            marginTop: 15,
+            color: "#38bdf8",
+            fontWeight: "bold"
+          }}>
+            {insight}
+          </p>
+        </>
+      ) : (
+        <p>No data yet</p>
+      )}
     </div>
   </div>
 );
