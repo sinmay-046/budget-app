@@ -8,9 +8,10 @@ function App() {
   const [category, setCategory] = useState("");
   const [summary, setSummary] = useState({});
   const [insight, setInsight] = useState("");
-  const BACKEND = "http://127.0.0.1:8000";
+  const BACKEND = "https://budget-app-wj1v.onrender.com";
   
   const addExpense = async () => {
+    console.log("clicked");
     if (!amount || !category) return;
 
     await axios.post(`${BACKEND}/add-expense`,{
