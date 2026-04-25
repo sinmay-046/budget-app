@@ -9,22 +9,27 @@ function App() {
   const [summary, setSummary] = useState({});
   const total = Object.values(summary).reduce((a, b) => a + b, 0);
   const [insight, setInsight] = useState("");
+  const [loading, setLoading] = useState(false);
   const BACKEND = "https://budget-app-wj1v.onrender.com";
   
   const addExpense = async () => {
-    console.log("clicked");
-    if (!amount || !category) return;
+  if (!amount || !category) return;
 
-    await axios.post(`${BACKEND}/add-expense`,{
-      amount: Number(amount),
-      category: category
-    });
+  setLoading(true);
 
-    setAmount("");
-    setCategory("");
-    fetchSummary();
-    fetchInsight();
-  };
+  await axios.post(`${BACKEND}/add-expense`, {
+    amount: Number(amount),
+    category
+  });
+
+  setAmount("");
+  setCategory("");
+
+  await fetchSummary();
+  await fetchInsight();
+
+  setLoading(false);
+};
 
   const fetchSummary = async () => {
     try {
@@ -106,19 +111,19 @@ function App() {
 </select>
 
       <button
-        onClick={addExpense}
-        style={{
-          padding: 12,
-          width: "100%",
-          background: "#38bdf8",
-          border: "none",
-          borderRadius: 8,
-          fontWeight: "bold",
-          cursor: "pointer",
-          transition: "0.3s"
-        }}
-      >
-        Add Expense
+  onClick={addExpense}
+  disabled={loading}
+  style={{
+    padding: 12,
+    width: "100%",
+    background: loading ? "#64748b" : "#38bdf8",
+    border: "none",
+    borderRadius: 8,
+    fontWeight: "bold",
+    cursor: "pointer"
+  }}
+>
+     {loading ? "Adding..." : "Add Expense"}
       </button>
 
       <h3 style={{ marginTop: 20 }}>📊 Breakdown</h3>
@@ -151,7 +156,9 @@ function App() {
           </p>
         </>
       ) : (
-        <p>No data yet</p>
+        <p style={{ color: "#94a3b8", marginTop: 20 }}>
+  No expenses yet. Start by adding one 👆
+</p>
       )}
     </div>
   </div>
