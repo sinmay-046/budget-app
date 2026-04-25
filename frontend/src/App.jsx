@@ -7,6 +7,7 @@ function App() {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [summary, setSummary] = useState({});
+  const total = Object.values(summary).reduce((a, b) => a + b, 0);
   const [insight, setInsight] = useState("");
   const BACKEND = "https://budget-app-wj1v.onrender.com";
   
@@ -42,6 +43,8 @@ function App() {
       console.error("Error fetching insight:", err);
     }
   };
+
+  const total = Object.values(summary).reduce((a, b) => a + b, 0);
 
   useEffect(() => {
     fetchSummary();
@@ -119,6 +122,10 @@ function App() {
       </button>
 
       <h3 style={{ marginTop: 20 }}>📊 Breakdown</h3>
+
+      <p style={{ marginTop: 10, fontSize: 14, color: "#94a3b8" }}>
+        Total: ₹{total}
+      </p>
 
       {Object.keys(summary).length > 0 ? (
         <>
