@@ -83,18 +83,24 @@ function App() {
         }}
       />
 
-      <input
-        placeholder="Category (Food, Travel...)"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        style={{
-          padding: 10,
-          marginBottom: 10,
-          width: "100%",
-          borderRadius: 8,
-          border: "none"
-        }}
-      />
+      <select
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+  style={{
+    padding: 10,
+    marginBottom: 10,
+    width: "100%",
+    borderRadius: 8,
+    border: "none"
+  }}
+>
+  <option value="">Select Category</option>
+  <option value="Food">Food</option>
+  <option value="Travel">Travel</option>
+  <option value="Shopping">Shopping</option>
+  <option value="Bills">Bills</option>
+  <option value="Other">Other</option>
+</select>
 
       <button
         onClick={addExpense}
