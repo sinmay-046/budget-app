@@ -65,16 +65,20 @@ function App() {
     alignItems: "center",
     fontFamily: "Arial"
   }}>
-    <div style={{
-      background: "rgba(30, 41, 59, 0.9)",
-      padding: 30,
-      borderRadius: 16,
-      width: 380,
-      textAlign: "center",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
-      backdropFilter: "blur(10px)",
-      color: "white"
-    }}>
+    <div
+  onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.02)"}
+  onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+  style={{
+    background: "rgba(30, 41, 59, 0.9)",
+    padding: 30,
+    borderRadius: 16,
+    width: 400,
+    textAlign: "center",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+    transition: "0.3s ease",
+    transform: "scale(1)"
+  }}
+>
       
       <h2 style={{ marginBottom: 20 }}>💰 Budget Tracker</h2>
 
